@@ -5,6 +5,8 @@ services:
     environment:
       - DB_HOST=db
       - RAILS_ENV=production
+    volumes:
+      - ./volumes/public:/rails_app/public
     ports:
       - 3000:3000
 
@@ -22,6 +24,9 @@ services:
     build:
       context: ../
       dockerfile: Docker/nginx/Dockerfile
+    volumes:
+      - ./volumes/public:/rails_app/public
+      - ./volumes/nginx-logs:/var/log/nginx
     ports:
       - 80:80
     depends_on:
