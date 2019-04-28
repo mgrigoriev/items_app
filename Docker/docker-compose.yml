@@ -14,7 +14,15 @@ services:
       - POSTGRES_PASSWORD=
       - POSTGRES_DB=items_app_production
     volumes:
-      - ../tmp/db/production:/var/lib/postgresql/data
+      - ./volumes/postgres-data/production:/var/lib/postgresql/data
     ports:
       - 5431:5432
 
+  web:
+    build:
+      context: ../
+      dockerfile: Docker/nginx/Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - app
