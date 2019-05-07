@@ -1,0 +1,33 @@
+version: '2'
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: Docker/Dockerfile
+    environment:
+      - DB_HOST=db
+      - RAILS_ENV=production
+    volumes:
+      - ./volumes/public:/rails_app/public
+    ports:
+      - 3000:3000
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=items_app_production
+    volumes:
+      - ./volumes/postgres-data/production:/var/lib/postgresql/data
+    ports:
+      - 5431:5432
+
+  web:
+    image: mgrigoriev/nginx-for-rails-app
+    volumes:
+      - ./volumes/public:/rails_app/public
+      - ./volumes/nginx-logs:/var/log/nginx
+    ports:
+      - 80:80
+    depends_on:
+      - app

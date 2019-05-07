@@ -25,3 +25,11 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Docker
+/Docker/volumes/*
+!/Docker/volumes/.keep
+
+# Vagrant
+.vagrant/
+
