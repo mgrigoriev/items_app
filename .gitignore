@@ -29,3 +29,7 @@
 # Docker
 /Docker/volumes/*
 !/Docker/volumes/.keep
+
+# Vagrant
+.vagrant/
+
