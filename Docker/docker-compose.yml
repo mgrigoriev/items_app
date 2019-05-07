@@ -1,7 +1,9 @@
 version: '2'
 services:
   app:
-    image: mgrigoriev/items_app
+    build:
+      context: ../
+      dockerfile: Docker/Dockerfile
     environment:
       - DB_HOST=db
       - RAILS_ENV=production
@@ -21,9 +23,7 @@ services:
       - 5431:5432
 
   web:
-    build:
-      context: ../
-      dockerfile: Docker/nginx/Dockerfile
+    image: mgrigoriev/nginx-for-rails-app
     volumes:
       - ./volumes/public:/rails_app/public
       - ./volumes/nginx-logs:/var/log/nginx
